@@ -36,6 +36,9 @@ const config = {
     }),
   ],
   resolve: {
+    alias: {
+      joi: 'joi-browser',
+    },
     modules: [
       srcDir,
       'node_modules'

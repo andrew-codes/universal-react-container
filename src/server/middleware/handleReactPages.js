@@ -5,7 +5,7 @@ import {renderToString} from 'react-dom/server';
 import App from '../../components/App';
 import renderFullPage from '../renderFullPage';
 import createStore from './../createStore';
-import {authenticate} from './../modules/Security/ActionCreators';
+import {authenticate} from './../../modules/Security/server';
 
 export default (req, res) => {
   const context = {};

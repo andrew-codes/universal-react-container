@@ -1,8 +1,10 @@
-import axios from 'axios';
 import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import {login} from './../modules/Security';
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     redirectToReferrer: false,
   };
@@ -12,8 +14,15 @@ export default class Login extends Component {
       redirectToReferrer
     } = this.state;
     const {
+      onLogin
+    } = this.props;
+    const {
       from
-    } = this.props.location.state || {from: {pathname: '/'}};
+    } = this.props.location.state || {
+      from: {
+        pathname: '/',
+      }
+    };
 
     if (redirectToReferrer) {
       return (
@@ -23,16 +32,14 @@ export default class Login extends Component {
 
     return (
       <button onClick={(evt) => {
-        axios.post('/api/login')
-          .then((result) => {
-            this.setState({
-              redirectToReferrer: true,
-            });
-          })
+        onLogin();
       }}>
         Login
       </button>
     );
   }
 }
+export default connect(() => ({}), (dispatch) => ({
+  onLogin: bindActionCreators(login, dispatch),
+}))(Login);
 

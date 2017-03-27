@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import securityReducer from './Security';
+import SecurityModule, {Name as SecurityModuleName} from './Security';
 
 export default combineReducers({
-  Security: securityReducer,
+  [SecurityModuleName]: SecurityModule,
 });

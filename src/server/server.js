@@ -1,20 +1,34 @@
 import express from 'express';
+import path from 'path';
 import React from 'react';
 import handleReactPages from './middleware/handleReactPages';
-import unless from './middleware/unless';
 import {isProduction} from './../env';
 
 const port = process.env.PORT || 3001;
 const app = express();
 
-const staticUrls = [
-  /^\/static/,
-];
 if (!isProduction) {
-  staticUrls.push(/^\/__webpack_hmr/);
+  const webpack = require('webpack');
+  const webpackConfig = require('./../../webpack.config');
+
+  const compiler = webpack(webpackConfig);
+
+  app.use(require('webpack-dev-middleware')(compiler, {
+    hot: true,
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath,
+    reload: true,
+  }));
+
+  app.use(require('webpack-hot-middleware')(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000,
+  }));
 }
-app.use(express.static('static'));
-app.use(unless(staticUrls, handleReactPages));
+
+app.use('/static', express.static(path.join(__dirname, '..', 'static')));
+app.use(handleReactPages);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

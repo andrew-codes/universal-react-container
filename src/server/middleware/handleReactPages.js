@@ -5,10 +5,12 @@ import {renderToString} from 'react-dom/server';
 import App from '../../components/App';
 import renderFullPage from '../renderFullPage';
 import createStore from './../createStore';
+import {authenticate} from './../modules/Security/ActionCreators';
 
 export default (req, res) => {
   const context = {};
   const store = createStore();
+  store.dispatch(authenticate(req.session.token));
 
   let markup = renderToString(
     <Provider store={store}>

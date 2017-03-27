@@ -7,4 +7,4 @@ if (!isProduction) {
   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 }
 
-export default () => createStore(reducer, composeEnhancers(applyMiddleware()))
+export default (initialState) => createStore(reducer, initialState, composeEnhancers(applyMiddleware()))

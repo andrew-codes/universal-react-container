@@ -5,7 +5,7 @@ import {BrowserRouter} from 'react-router-dom';
 import App from './../components/App';
 import createStore from './createStore';
 
-const store = createStore();
+const store = createStore(window.__PRELOADED_STATE__);
 ReactDOM.render((
   <Provider store={store}>
     <BrowserRouter>

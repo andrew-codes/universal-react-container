@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon src/server/server.js",
+    "start": "cross-env NODE_ENV=development SECURITY_TOKEN_SECRET=development nodemon src/server/server.js",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
     "build": "npm run build/server && npm run build/client",
@@ -16,7 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.15.3",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "jsonwebtoken": "^7.3.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",

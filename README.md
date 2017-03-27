@@ -2,7 +2,7 @@
 
 ## Development
  
-### Perquisites
+### Prerequisites
 
 - [node@^6.10.0](https://nodejs.org/en/)
 - [yarn@^0.21.3](https://yarnpkg.com/en/)
